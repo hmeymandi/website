@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+{{% block titel %}
+  پروفایل کاربری
+{% endblock titel %}}
+
+{% block main %}
+
+<form method="post" enctype="application/x-www-form-urlencoded">
+    {% csrf_token %}
+    <div class="row">
+      
+      <div class="col-6">
+
+        
+        {{form.first_name|as_crispy_field }}
+      </div>
+      <div class='col-6'>
+        {{form.last_name|as_crispy_field }}
+      </div>
+        
+      <div class='col-6'>
+        {{form.idcart|as_crispy_field }}
+    </div>
+
+    <div class='col-6'>
+        {{form.phone|as_crispy_field }}
+        
+    </div>
+
+    <div class='col-6'>
+        {{form.address|as_crispy_field }}
+        {{form.shift|as_crispy_field }}
+
+
+    </div>
+
+    <div class='col-6'>
+        {{form.date|as_crispy_field }}
+       
+
+    </div>
+    {% if request.user.is_nazer or request.user.is_admin %}
+    {{form.is_nazer|as_crispy_field }}
+    {% elif request.user.is_manager or request.user.is_admin %}
+    {{form.is_manager|as_crispy_field}}
+    {% elif request.user.is_authe or request.user.is_admin %}
+    {{form.is_authe|as_crispy_field}}
+    {%else%}
+    
+
+    {{form.is_active|as_crispy_field}}
+
+    {% endif %}
+
+        
+        
+
+
+      </div>
+  
+{% endblock main %}

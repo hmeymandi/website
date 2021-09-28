@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block titel%}گزارشات{% endblock%}
+
+
+{% block main %}
+  
+
+
+<div class="row">
+    <div class="col-12">
+      <div class="card">
+        
+        <!-- /.card-header -->
+        <div class="card-body table-responsive p-0">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th> شماره گزارش</th>
+                <th>موضوع</th>
+                <th>نام کاربر</th>
+                <th>تاریخ</th>
+                <th>شیفت</th>
+                <th>وضیعت</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                {% for reports in report  %}
+    
+                  
+                
+                <td>{{reports.id}}</td>
+                <td>  <a href="{% url report:updatereport' report.pk %}">{{reports.subject}}</a></td>
+                <td>{{reports.user.first_name}} {{reports.user.last_name}}</td>
+                <td>{{reports.persian_number}}</td>
+                <td>{{reports.shift}}</td>
+                <td>
+                  {% if 'تایید نشده'  in reports.acepet%}
+                    <span class='badge badge-danger'> تایید نشده</span>
+                  {%elif 'تایید سر شیفت' in reports.acepet%}
+                  <span class='badge badge-warning'>تایید سر شیفت</span>
+                  {%else%}
+                  <span class='badge badge-success'>تایید نهایی</span>
+
+                  {% endif %}
+
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+    </div>
+  </div>
+
+
+  {% endblock main %}

@@ -1,0 +1,106 @@
+{%load static%}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<title>ورود به سامانه</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="{%static 'reg/images/icons/favicon.ico' %}"/>
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="{%static 'reg/css/rtl.css' %}">
+	<link rel="stylesheet" type="text/css" href="{%static 'reg/vendor/bootstrap/css/bootstrap.min.css' %}">
+
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{%static 'reg/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{%static 'reg/fonts/Linearicons-Free-v1.0.0/icon-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{%static 'reg/vendor/animate/animate.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{%static 'reg/vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{%static 'reg/vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{%static 'reg/vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{%static 'reg/vendor/daterangepicker/daterangepicker.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{%static 'reg/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{%static 'reg/css/main.css' %}">
+
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-t-50 p-b-90">
+				<form class="login100-form validate-form flex-sb flex-w" method="POST" >{% csrf_token %}
+					<span class="login100-form-title p-b-51 myfont">
+						  ورود به سامانه
+					</span>
+							
+					
+					<div class="wrap-input100 validate-input m-b-16 " data-validate = "Username is required">
+						{{form.idcart}}
+						
+						<input class="input100 myfont" type="text" name="username" placeholder="کلمه کاربری">
+						<span class="nput100 myfont">{{form.password}}</span>
+					</div>
+					
+					
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
+						<input class="input100 myfont" type="password" name="pass" placeholder="رمز عبور">
+						<span class="focus-input100"></span>
+					</div>
+					
+					<div class="flex-sb-m w-full p-t-3 p-b-24">
+						<div class="contact100-form-checkbox">
+							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+							<label class="label-checkbox100 myfont" for="ckb1">
+								ذخیره
+							</label>
+						</div>
+
+						<div>
+							<a href="#" class="txt1 myfont">
+								فراموشی رمز عبور
+							</a>
+						</div>
+					</div>
+
+					<div class="container-login100-form-btn m-t-17">
+						<button class="login100-form-btn myfont" type="submit">
+							ورود به سامانه
+						</button>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+	
+<!--===============================================================================================-->
+	<script src="{%static 'reg/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{%static 'reg/vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{%static 'reg/vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{%static 'reg/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{%static 'reg/vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{%static 'reg/vendor/daterangepicker/moment.min.js' %}"></script>
+	<script src="{%static 'reg/vendor/daterangepicker/daterangepicker.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{%static 'reg/vendor/countdowntime/countdowntime.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{%static 'reg/js/main.js' %}"></script>
+
+</body>
+</html>

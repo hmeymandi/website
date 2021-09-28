@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block titel %}
+ سیستم مرخصی
+{% endblock titel %}
+
+
+
+{% block main %}
+  
+
+<div class="col-12">
+    <div class="card">
+      
+      <!-- /.card-header -->
+      <div class="card-body table-responsive p-0">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              
+              <th>نام کاربر</th>
+              <th>شروع مرخصی</th>
+              <th>پایان مرخصی</th>
+              <th>نام جایگزین</th>
+              <th>میزان مرخصی</th>
+              <th>نوع مرخصی</th>
+              <th>وضیعت</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {% for rests in form  %}
+              
+                                       
+              <td> {% if rests.accept in  'در دست بررسی' and request.user.is_manager  %}
+
+                <a href="{% url 'rest:update' rests.pk %}"> {{rests.user1.first_name}} {{rests.user1.last_name}}</a>
+
+                <td>{% elif rests.accept in  'تایید سرپرست' and request.user.is_nazer  %}
+                  <a href="{% url 'rest:update' rests.pk %}"> {{rests.user1.first_name}} {{rests.user1.last_name}}</a>
+
+                {%else%}
+                {{rests.user1.id}} {{rests.user1.last_name}}
+              {% endif %}</td>
+
+              <td>{{rests.persian_number}} </td>
+              <td>{{rests.persian_number1}}</td>
+              <td>{{rests.user.first_name}}  {{rests.user.last_name}}</td>
+
+              <td>{{rests.timeavg}}</td>
+              <td>{{rests.type}}</td>
+             <td>
+                  {% if 'در دست بررسی' in rests.accept %}
+                  <span class='badge badge-secondary'> در حال بررسی</span>
+                  {%elif 'تایید سرپرست' in rests.accept %}
+                  <span class='badge badge-primary'> تایید سرپرست</span>
+
+                  {%elif 'تایید ناظر' in rests.accept %}
+                  <span class='badge badge-success'> تایید ناظر</span>
+                  
+                  {%else%}
+
+                  <span class='badge badge-danger'> تایید نشده</span>
+                  
+                  {% endif %}
+
+
+
+             </td>
+            </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
+       
+      </div>
+      <!-- /.card-body -->
+    </div>
+    
+  </div>
+ 
+</div>
+
+    
+
+{% endblock main %}
+

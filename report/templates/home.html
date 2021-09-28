@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title%}اطلاعیه{% endblock%}
+
+{% block titel %}
+  اخبار و اطلاعیه
+{% endblock titel %}
+
+
+{% block main %}
+  
+
+
+<div class="row">
+    <div class="col-12">
+      <div class="card">
+        
+        <!-- /.card-header -->
+        <div class="card-body table-responsive p-0">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th> شماره گزارش</th>
+                <th>موضوع</th>
+                <th>نام کاربر</th>
+                <th>تاریخ</th>
+                <th>شیفت</th>
+                <th>وضیعت</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                {% for info in categ  %}
+    
+                  
+                
+                <td>{{info.id}}</td>
+                <td>  <a href="{{info.get_absolute_url1}}">{{info.subject}}</a></td>
+                <td>{{info.user.first_name}} {{info.user.last_name}}</td>
+                <td>{{info.persian_number}}</td>
+                <td>{{info.shift}}</td>
+                
+                <td>
+                 
+
+              
+
+                </td>
+              </tr>
+
+                <!-- Modal content -->
+
+
+
+              {% endfor %}
+              
+            </tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+    </div>
+  </div>
+
+  
+  
+  {% endblock main %}

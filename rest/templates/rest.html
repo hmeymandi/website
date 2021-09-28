@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load jalali_tags %}
+
+
+
+{% block titel %}
+ سیستم مرخصی
+{% endblock titel %}
+
+
+{% block main %}
+
+<!-- OR -->
+<!-- loading by form (if used AdminJalaliDateWidget) -->
+
+<div class="col-md-12">
+    <!-- general form elements -->
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title mb-0 float-left">ارسال مرخصی</h3>
+     
+    </div>
+
+     
+
+  
+<form method="post" enctype="application/x-www-form-urlencoded">
+    {% csrf_token %}
+    <div class="row">
+      
+      <div class="col-6">
+
+        {{form.user|as_crispy_field }}
+        {{form.date|as_crispy_field }}
+
+
+      </div>
+      <div class='col-6'>
+        {{form.type|as_crispy_field }}
+        {{form.dateexit|as_crispy_field }}
+
+      </div>
+     
+     
+        <div class='col-6'>
+        {{ form.time1|as_crispy_field }}
+        {%if request.user.is_admin%}
+        {{ form.accept|as_crispy_field }}
+        
+        {%elif request.user.is_manager%}
+          <select name="accept" class="select form-control" id="id_accept">
+            
+            <option value="تایید سرپرست">تایید سرپرست</option>
+
+            <option value="تایید نشده">تایید نشده</option>
+          </select>
+
+          {%elif request.user.is_nazer%}
+          <select name="accept" class="select form-control" id="id_accept">
+            
+            <option value="تایید ناظر">تایید ناظر</option>
+
+            <option value="تایید نشده">تایید نشده</option>
+          </select>
+          {%else%}
+          <select name="accept" class="select form-control" id="id_accept">
+            <option value="در دست بررسی" selected="">در دست بررسی</option>
+          </select>
+       
+          {%endif%}
+
+      
+        </div>
+       
+       
+        
+      
+        <div class='col-6'>
+        {{ form.time2|as_crispy_field }}
+        {% if request.user.is_admin  or request.user.is_nazer or request.user.is_manager  %}
+        {{ form.user1|as_crispy_field }}
+        {% endif %}
+      
+        </div>
+        
+
+
+
+
+      
+
+      </div>
+      <button type="submit" class='btn btn-success'>ارسال مرخصی</button>   
+    
+        
+   
+       
+      </div>
+    
+</form> 
+
+
+{% endblock main %}
+

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+
+{% block main %}
+
+<div class="card" style="background-color: rgb(120, 220, 238);">
+    <div class="card-header">
+      <h3 class="card-title"></h3>{{form.subject}}
+      <span></span>
+
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+          <i class="fas fa-minus"></i></button>
+        <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+          <i class="fas fa-times"></i></button>
+      </div>
+    </div>
+    <div class="card-body">
+        <p>{{form.report|safe}}</p>
+       
+        
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer " >
+      <ul class="list-group list-group-flush" style="background-color: rgb(221, 220, 235);" >
+         شیفت:{{form.shift}}
+         تاریخ ثبت : {{form.persian_number}}
+        
+         
+         
+    
+      
+    </div>
+    
+    <!-- /.card-footer-->
+  </div>
+
+
+
+  
+  
+  
+{% endblock main %}

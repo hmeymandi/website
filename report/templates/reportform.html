@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+
+{% block titel %}
+ ارسال گزارش
+{% endblock titel %}
+
+
+{%block main%}
+
+
+
+<div class="col-md-12">
+    <!-- general form elements -->
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title mb-0 float-left">ارسال گزارش</h3>
+      </div>
+    
+  
+<form method="post" enctype="application/x-www-form-urlencoded">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-6">
+        {{ form.subject|as_crispy_field }}
+        
+        
+      </div>
+       
+      <div class="col-6">
+        {{form.slug|as_crispy_field }}
+        
+        
+        
+      </div>
+        <div class='col-6'>
+        {{form.date|as_crispy_field}}
+        </div>
+        <div class="col-12">
+        {{ form.report|as_crispy_field }}
+        
+    </div>
+    <div class="col-6">
+        {{ form.shift|as_crispy_field }}
+        {% if user.is_admin  %}
+        {{ form.user|as_crispy_field }}
+        {% endif %}   
+    </div>
+    <div class="col-6">
+                
+         {% if user.is_admin  %}
+         {{ form.categ|as_crispy_field }}
+         {{ form.acepet|as_crispy_field }}
+         
+
+         {%elif user.is_nazer %}
+
+         <select name="acepet" class="select form-control" id="id_acepet" >
+           
+          <option value="تایید نشده" selected="">تایید نشده</option>
+        
+          
+        
+          <option value="تایید نهایی">تایید نهایی</option>
+        
+        </select>
+
+          {%elif user.is_authe %}
+          <select name="acepet" class="select form-control" id="id_acepet">
+            
+            <option value="تایید سر شیفت">تایید سر شیفت</option>
+           
+            </select>
+
+            {%else%}    
+              
+       
+        <select name="acepet" class="select form-control" id="id_acepet">
+        <option value="تایید نشده" selected="">تایید نشده</option>
+        
+        
+        </select>
+       {% endif %}
+        
+        
+       
+
+    </div>
+        
+        
+          
+<button type="submit" class='btn btn-success'>ارسال گزارش</button>
+</form>
+
+{%endblock %}
