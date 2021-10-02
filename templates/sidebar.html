@@ -68,6 +68,23 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{% url 'rest:repcreate' %}" class="nav-link">
+              <i class="nav-icon fas fa fa-wrench"></i>
+              <p>
+                  قطعات معیوب
+                
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{%url 'rest:rephome'%}" class="nav-link {% if request.resolver_match.url_name == 'listreport' %}active {%endif%}">
+              <i class="fa fa-list nav-icon"></i>
+              <p>لیست قطعات</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="{% url 'account:profile' %}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
@@ -76,6 +93,8 @@
               </p>
             </a>
           </li>
+
+
           
         </ul>
 

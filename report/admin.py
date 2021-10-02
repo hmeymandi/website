@@ -3,9 +3,10 @@ from .models import *
 
 @admin.register(Reportmodel)
 class Reportadmin(admin.ModelAdmin):
-    field=['user','shift','user']
+    field=['user','shift','subject']
+    list_filter=['date']
     list_display=['user','shift','date','category_to_str']
-
+    prepopulated_fields={'slug':('subject',)}   
 
     def category_to_str(self,obj):
     

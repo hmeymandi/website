@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+
+{% block titel %}
+قطعات معیوب
+{% endblock titel %}
+
+
+
+{% block main %}
+
+<div class="col-12">
+    <div class="card">
+      
+      <!-- /.card-header -->
+      <div class="card-body table-responsive p-0">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              
+              <th>نام کاربر</th>
+              <th>نام قطعه</th>
+              <th>تاریخ ثبت</th>
+              <th>نام ایستگاه </th>
+              <th>توضیحات</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {% for reps in form  %}
+              
+                                       
+              <td>{{reps.user.first_name}}  {{reps.user.last_name}}</td>
+              {% if request.user.is_admin or request.user.is_nazer  %}
+              <td><a href=" {% url 'rest:repupdate' reps.id %} " > {{reps.name}}</a></td>
+              {%else%}
+              <td>{{reps.name}}</td>
+              {% endif %}
+              
+              <td>{{reps.time2time}}</td>
+              <td>{{reps.station}}</td>
+              <td><span class="badge badge-primary"> {{reps.subj}}</span></td>
+             
+            </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
+       
+      </div>
+      <!-- /.card-body -->
+    </div>
+    
+  </div>
+ 
+</div>
+
+    
+
+{% endblock main %}
+

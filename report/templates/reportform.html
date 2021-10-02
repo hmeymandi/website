@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load crispy_forms_field %}
+{% load widget_tweaks %}
+
 
 
 
@@ -24,23 +27,27 @@
     {% csrf_token %}
     <div class="row">
       <div class="col-6">
+       
         {{ form.subject|as_crispy_field }}
-        
+       
         
       </div>
        
       <div class="col-6">
-        {{form.slug|as_crispy_field }}
-        
+        {% if request.user.is_admin  %}
+        {{form.slug|as_crispy_field}}
+        {% endif %}
+       
         
         
       </div>
         <div class='col-6'>
+          
         {{form.date|as_crispy_field}}
         </div>
         <div class="col-12">
-        {{ form.report|as_crispy_field }}
-        
+       
+          {{form.report|as_crispy_field}}
     </div>
     <div class="col-6">
         {{ form.shift|as_crispy_field }}

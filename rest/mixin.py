@@ -17,7 +17,7 @@ class FieldMixin():
                self.fields=['user','user1','type','time1','time2','accept','date','dateexit']
         elif self.request.user.is_authe or self.request.user.is_active:
 
-               self.fields=['user','type','time1','time2','accept']
+               self.fields=['user','type','time1','time2','accept','dateexit','date']
        
         else:
             raise Http404
@@ -57,10 +57,51 @@ class AccsesMixin():
 class Jalali2date():
     def get_form(self, form_class=None):
         form = super().get_form( form_class)
-        form.fields['date']=JalaliDateField(label=('تاریخ ثبت'),widget=AdminDateWidget)
-        form.fields['time1'] =TimeField(label=('شروع ساعت مرحضی'),widget=TimeInput)
-        form.fields['time2']=TimeField(label=('پایان ساعت مرحضی'),widget=TimeInput)
+        form.fields['date']=JalaliDateField(label=(' تاریخ ثبت مرخصی'),widget=AdminJalaliDateWidget)
+        form.fields['dateexit']=JalaliDateField(label=('تاریخ خاتمه مرخصی'),widget=AdminJalaliDateWidget)
+        form.fields['time1'] =TimeField(label=('شروع ساعت مرخصی'),widget=TimeInput)
+        form.fields['time2']=TimeField(label=('پایان ساعت مرخصی'),widget=TimeInput)
         form.fields['date'].help_text=' روز/ماه/سال'
         form.fields['dateexit'].help_text=' روز/ماه/سال'
         return form    
 
+class FieldRepMixin():
+    
+    def dispatch(self, request, *args, **kwargs):
+          
+   
+        if self.request.user.is_admin or self.request.user.is_nazer:
+               
+               self.fields=['user','date','name','station','subj']
+        elif self.request.user.is_authe or self.request.user.is_active:
+
+               self.fields=['date','name','station','subj']
+       
+        else:
+            raise Http404
+        return super().dispatch(request,*args,**kwargs)
+
+class FormRepValid():
+    def form_valid(self,form):
+        if self.request.user.is_admin:
+            form.save()
+
+        else:
+            form.instance.user=self.request.user
+                              
+            self.obj=form.save()
+            
+        return super().form_valid(form)
+
+
+class AccsesrepMixin():
+    # user=is_active is_admin is_authe  is_manager is_nazer
+    def dispatch(self, request,pk, *args, **kwargs):
+        update=Repmodel.objects.get(pk=pk)
+        if update.user==request.user or  request.user.is_admin or \
+            request.user.is_manager  :
+            return super().dispatch(request,pk,*args,**kwargs)
+       
+        
+        else:
+            raise Http404 ('شما دسترسی به این بحش را ندارید')

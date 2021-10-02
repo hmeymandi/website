@@ -35,10 +35,10 @@ class Restmodel(models.Model):
     
     user=models.ForeignKey(User,on_delete=models.CASCADE,verbose_name='نام جایگزین')
     user1=models.ForeignKey(User,on_delete=models.CASCADE,related_name='user',verbose_name='نام کاربری',null=True)
-    date=jmodels.jDateField(null=True,verbose_name='تاریخ ثبت')
+    date=jmodels.jDateField(verbose_name='تاریخ ثبت')
     time1=models.TimeField(null=True,verbose_name='شروع مرخصی')
     time2=models.TimeField(null=True,verbose_name='پایان مرخصی')
-    dateexit=jmodels.jDateField(null=True,verbose_name='تاریخ ورود')
+    dateexit=jmodels.jDateField(verbose_name='تاریخ ورود')
     type=models.CharField(max_length=20,default='h',choices=type_status,verbose_name='نوع مرخصی')
     accept=models.CharField(default='در دست بررسی',max_length=30,choices=accept_status,verbose_name='وضیعت')
     timeavg=models.CharField(max_length=250,)
@@ -99,7 +99,7 @@ class Restmodel(models.Model):
         return time1str   
     @property
     def timeavg(self):
-        if (self.dateexit>self.date):
+        if (self.dateexit > self.date):
             a=(self.dateexit-self.date).days
        
         
@@ -144,15 +144,39 @@ class Restmodel(models.Model):
         
 
 
+
 class Repmodel(models.Model):
     class Meta:
         verbose_name=' سیستم قطعات معیوب'
         verbose_name_plural='سیستم قطعات معیوب'
-
     user=models.ForeignKey(User,on_delete=CASCADE,verbose_name='نام کاربری')
-    date=jmodels.jDateTimeField(null=True,default= datetime.now,verbose_name='تاریخ ثبت')
+    date=jmodels.jDateTimeField(null=True,default= datetime.now().replace(microsecond=0),verbose_name='تاریخ ثبت')
     name=models.CharField(max_length=150,verbose_name='نام قطعه')
     station=models.CharField(max_length=50,verbose_name='نام ایستگاه')
     subj=models.CharField(max_length=500,verbose_name='توضیحات')
 
+   
 
+
+    def time2time(self):        
+            
+        datetime2jalali=str(self.date.strftime("%Y-%m-%d %X"))
+                
+        number={
+            '0':'۰',
+            '1':'۱',
+            '2':'۲',
+            '3':'۳',
+            '4':'۴',
+            '5':'۵',
+            '6':'۶',
+            '7':'۷',
+            '8':'۸',
+            '9':'۹',
+       }
+
+        for i,j in number.items():
+            datetime2jalali=datetime2jalali.replace(i,j)
+        
+            
+        return datetime2jalali

@@ -5,7 +5,7 @@
 
 <div class="card" style="background-color: rgb(120, 220, 238);">
     <div class="card-header">
-      <h3 class="card-title"></h3>{{form.subject}}
+      <h3 class="card-title"></h3>{{object.subject}}
       <span></span>
 
       <div class="card-tools">
@@ -16,15 +16,15 @@
       </div>
     </div>
     <div class="card-body">
-        <p>{{form.report|safe}}</p>
+        <p>{{object.report|safe}}</p>
        
         
     </div>
     <!-- /.card-body -->
     <div class="card-footer " >
       <ul class="list-group list-group-flush" style="background-color: rgb(221, 220, 235);" >
-         شیفت:{{form.shift}}
-         تاریخ ثبت : {{form.persian_number}}
+         شیفت:{{object.shift}}
+         تاریخ ثبت : {{object.persian_number}}
         
          
          

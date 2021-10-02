@@ -6,13 +6,16 @@ from accounts.models import User
 from django.db.models.fields import CharField
 from django.urls import reverse
 from jalali_date import datetime2jalali,date2jalali
-from django.contrib.contenttypes.fields import GenericRelation
-from jalali_date.fields import JalaliDateField, JalaliDateTimeField, SplitJalaliDateTimeField
-from jalali_date.widgets import AdminJalaliDateWidget, AdminSplitJalaliDateTime
+from django.utils.text import slugify
+
+
 import jdatetime
 from django.db import models
 from django_jalali.db import models as jmodels
 
+
+from django.db.models import CharField, Model
+from autoslug import AutoSlugField
 
 
 
@@ -57,23 +60,29 @@ class Reportmodel(models.Model):
     shift_status=(('شیفت A','شیفت A'),
     ('شیفت B','شیفت B'),
     ('شیفت C','شیفت C'),)
-   
+    maintime=jdatetime.datetime.now
     subject=models.CharField(max_length=100,verbose_name='موضوع')
     categ=models.ManyToManyField(Informationmodel,verbose_name='دسته بندیُ',related_name='info')
     report=models.TextField(verbose_name='گزارش')
-    date=jmodels.jDateTimeField(default=datetime.now(),verbose_name='تاریخ ثبت',)
+    date=jmodels.jDateTimeField(default=maintime,verbose_name='تاریخ ثبت',)
     user=models.ForeignKey(User,on_delete=models.CASCADE,verbose_name='نام کاربری')
     shift=models.CharField(max_length=50,choices=shift_status,verbose_name='شیفت',null=True)
     acepet=models.CharField(max_length=30,choices=acepet_status,default='تایید نشده',verbose_name='وضیعت')
-    slug=models.SlugField(max_length=200,unique_for_date='date',verbose_name='آدرس گزارش')
+    slug=models.SlugField(unique=True,verbose_name='آدرس گزارش',blank=True)
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.date)
+        super().save(*args, **kwargs)
 
+    def __str__(self):
+
+        return "{} {} {} {}".format(self.subject,self.date,self.user,self.shift)
     
     def get_absolute_url(self):
         return reverse("net:listreport")
     
     def get_absolute_url1(self):
-        return reverse('net:detailreport',args=[self.slug,self.pk])
+        return reverse('net:detail',args=[self.slug])
 
   
 

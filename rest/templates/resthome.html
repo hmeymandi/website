@@ -26,6 +26,8 @@
               <th>نام جایگزین</th>
               <th>میزان مرخصی</th>
               <th>نوع مرخصی</th>
+              <th>تاریخ شروع مرخصی</th>
+              <th>تاریخ خاتمه مرخصی</th>
               <th>وضیعت</th>
             </tr>
           </thead>
@@ -42,7 +44,7 @@
                   <a href="{% url 'rest:update' rests.pk %}"> {{rests.user1.first_name}} {{rests.user1.last_name}}</a>
 
                 {%else%}
-                {{rests.user1.id}} {{rests.user1.last_name}}
+                {{rests.user1.first_name}} {{rests.user1.last_name}}
               {% endif %}</td>
 
               <td>{{rests.persian_number}} </td>
@@ -51,6 +53,8 @@
 
               <td>{{rests.timeavg}}</td>
               <td>{{rests.type}}</td>
+              <td>{{rests.date}}</td>
+              <td>{{rests.dateexit}}</td>
              <td>
                   {% if 'در دست بررسی' in rests.accept %}
                   <span class='badge badge-secondary'> در حال بررسی</span>

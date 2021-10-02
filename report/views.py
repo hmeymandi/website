@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate,login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import User
 from django.core.paginator import Paginator
-from django.views.generic import CreateView,UpdateView
+from django.views.generic import CreateView,UpdateView,DetailView
 from .decorators import mix, unauthanticate
 from django.contrib.auth.decorators import login_required
 from .forms import Reportform
@@ -27,12 +27,15 @@ def listreport(request,):
 
         return render(request,'listreport.html',context)
 
-@login_required
-def detailreport(request,slug,pk):
+
+
+
+
+#def detailreport(request,slug):
     
-    form=Reportmodel.objects.get(slug=slug,pk=pk)
+ #   form=Reportmodel.objects.get(slug=slug)
     
-    return render(request,'deatil.html',{'form':form})
+  #  return render(request,'deatil.html',{'form':form})
 @login_required
 def myreport(request):
     
@@ -54,7 +57,11 @@ def home(request):
     return render(request,'home.html',context)
 
     
-
+class Reportdeatail(DetailView):
+    template_name='detailreport.html'
+    def get_object(self):
+        slug=self.kwargs.get('slug')
+        return get_object_or_404(Reportmodel.objects.all(),slug=slug)
 
 class ReportCreate(LoginRequiredMixin,FormValidMixin,FieldMixin,CreateView):
     model=Reportmodel

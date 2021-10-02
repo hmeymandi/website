@@ -27,9 +27,34 @@ class Restcreate(LoginRequiredMixin,Jalali2date,FormValid,FieldMixin,CreateView)
     def get_success_url(self):
         return reverse('rest:myrest')
     
+class RepCreate(LoginRequiredMixin,FormRepValid,FieldRepMixin,CreateView):
+    model=Repmodel
+    #fields='__all__'
+    template_name='rep.html'
     
+    def get_form(self,form_class=None):
+        form=super().get_form(form_class)
 
+        form.fields['date'].disabled=True
+        return form
+        
+    
+    def get_success_url(self):
+        return reverse('rest:rephome')
 
+class Repupdate(AccsesrepMixin,FieldRepMixin,UpdateView):
+    model=Repmodel
+    template_name="rep.html"
+
+    def get_form(self,form_class=None):
+        form=super().get_form(form_class)
+
+        form.fields['date'].disabled=True
+        return form
+        
+
+    def get_success_url(self):
+        return reverse('rest:rephome')
 
 class Restupdate(AccsesMixin,FieldMixin,UpdateView):
     model=Restmodel
@@ -38,6 +63,10 @@ class Restupdate(AccsesMixin,FieldMixin,UpdateView):
 
     def get_success_url(self):
         return reverse('rest:myrest')
+@login_required
+def rephome(request):
+    form=Repmodel.objects.all().order_by('-date')
+    return render (request,'rephome.html',{'form':form})
 
 @login_required
 def rest(request):
