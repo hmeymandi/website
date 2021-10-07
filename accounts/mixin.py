@@ -17,12 +17,12 @@ class FieldMixin():
           
           if self.request.user.is_admin or self.request.user.is_manager:
                
-               self.fields=['subject','categ','slug','date','report','shift','user','acepet']
+               self.fields=['subject','categ','slug','date','report','shift','user','acepet','numbercmms','device']
           elif self.request.user.is_authe or self.request.user.is_nazer:
 
-               self.fields=['subject','slug','date','report','shift','acepet']
+               self.fields=['subject','date','report','shift','acepet','numbercmms','device']
           elif self.request.user.is_active:
-               self.fields=['subject','slug','date','report','shift',]
+               self.fields=['subject','slug','date','report','shift','numbercmms','device']
                
 
         
@@ -38,7 +38,7 @@ class FormValidMixin():
           else:
                a=(Informationmodel.objects.get(position=2))
                
-               #b=Reportmodel.objects.get(user=2)   
+               #b=StationModel.objects.get(position=1)   
                                                                                                                                   
          
                

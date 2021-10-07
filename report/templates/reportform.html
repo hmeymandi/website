@@ -27,76 +27,82 @@
     {% csrf_token %}
     <div class="row">
       <div class="col-6">
-       
+   
+
         {{ form.subject|as_crispy_field }}
+        {{form.numbercmms|as_crispy_field }}
+        
+        {{form.device|as_crispy_field }}
+        {{ form.shift|as_crispy_field }}
+      
        
         
       </div>
        
       <div class="col-6">
+        {{form.date|as_crispy_field}}
         {% if request.user.is_admin  %}
         {{form.slug|as_crispy_field}}
         {% endif %}
-       
+        {{form.report|as_crispy_field}}
         
+
+        {% if user.is_admin  %}
+        {{ form.acepet|as_crispy_field }}
+        
+       
+        {%elif user.is_nazer %}
+        <label for="id_acepet">وضیعت*</label>
+        <select name="acepet" class="select form-control" id="id_acepet" >
+         <option value="تایید نشده" selected="">تایید نشده</option>
+     
+         
+       
+         <option value="تایید نهایی">تایید نهایی</option>
+       
+       </select>
+       
+       
+         {%elif user.is_authe %}
+         <label for="id_acepet">وضیعت*</label>
+         <select  name="acepet" class="select form-control" id="id_acepet" >
+           
+           <option value="تایید سر شیفت">تایید سر شیفت</option>
+        
+           </select>
+       
+           {%else%}    
+       
+      
+       <select name="acepet" class="select form-control" id="id_acepet">
+       <option value="تایید نشده" selected="">تایید نشده</option>
+       
+       
+       </select>
+    
+      {% endif %}
+       
         
       </div>
-        <div class='col-6'>
-          
-        {{form.date|as_crispy_field}}
-        </div>
-        <div class="col-12">
-       
-          {{form.report|as_crispy_field}}
-    </div>
+      
+      
     <div class="col-6">
-        {{ form.shift|as_crispy_field }}
+      
+
         {% if user.is_admin  %}
         {{ form.user|as_crispy_field }}
         {% endif %}   
     </div>
     <div class="col-6">
-                
+      
          {% if user.is_admin  %}
          {{ form.categ|as_crispy_field }}
-         {{ form.acepet|as_crispy_field }}
-         
-
-         {%elif user.is_nazer %}
-
-         <select name="acepet" class="select form-control" id="id_acepet" >
-           
-          <option value="تایید نشده" selected="">تایید نشده</option>
-        
-          
-        
-          <option value="تایید نهایی">تایید نهایی</option>
-        
-        </select>
-
-          {%elif user.is_authe %}
-          <select name="acepet" class="select form-control" id="id_acepet">
-            
-            <option value="تایید سر شیفت">تایید سر شیفت</option>
-           
-            </select>
-
-            {%else%}    
-              
-       
-        <select name="acepet" class="select form-control" id="id_acepet">
-        <option value="تایید نشده" selected="">تایید نشده</option>
-        
-        
-        </select>
-       {% endif %}
-        
-        
-       
+        {%endif%}
+                
 
     </div>
         
-        
+  </div>
           
 <button type="submit" class='btn btn-success'>ارسال گزارش</button>
 </form>

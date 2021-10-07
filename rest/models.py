@@ -1,5 +1,6 @@
 from datetime import timedelta
 from django.db import models
+from report.models import Reportmodel 
 from django.contrib.auth import get_user_model as user_model
 from django.db.models.aggregates import Avg
 from django.db.models.fields import BLANK_CHOICE_DASH

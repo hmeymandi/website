@@ -1,5 +1,6 @@
 from datetime import date, datetime, time,timedelta
 from django.db import models
+from django.db.models.deletion import CASCADE, SET_NULL
 from django.utils import timezone
 from django.contrib.auth import get_user_model as user_model
 from accounts.models import User
@@ -15,7 +16,6 @@ from django_jalali.db import models as jmodels
 
 
 from django.db.models import CharField, Model
-from autoslug import AutoSlugField
 
 
 
@@ -28,6 +28,37 @@ from autoslug import AutoSlugField
 User=user_model()
 
 
+
+class DeviceModel(models.Model):
+    class Meta:
+        verbose_name = 'نام تجهیز'
+        verbose_name_plural = 'نام تجهیز'
+    device_name = models.CharField(max_length=75,verbose_name='نام تجهیز')
+    slug=models.SlugField(max_length=50,unique=True,verbose_name='آدرس')
+    status=models.BooleanField(default=True,verbose_name='نمایش ')
+    position=models.IntegerField(default=None,verbose_name='موقیعت',)
+
+    def __str__(self):
+        return self.device_name
+
+class StationModel(models.Model):
+    class Meta:
+        verbose_name = 'نام ایستگاه و مکان های مترو'
+        verbose_name_plural = 'نام ایستگاه و مکان های مترو'
+    mastername = models.ForeignKey('self',default=None,blank=True,null=True,on_delete=models.SET_NULL,related_name='name',verbose_name='زیر دسته')
+    
+    titel=models.CharField(max_length=50,verbose_name='عنوان')
+    slug=models.SlugField(max_length=50,unique=True,verbose_name='آدرس')
+    status=models.BooleanField(default=True,verbose_name='نمایش ')
+    position=models.IntegerField(default=None,verbose_name='موقیعت',)
+
+
+
+    def __str__(self):
+        
+        return '{}'.format(self.titel)
+       
+       
 
 
 class Informationmodel(models.Model):
@@ -60,15 +91,18 @@ class Reportmodel(models.Model):
     shift_status=(('شیفت A','شیفت A'),
     ('شیفت B','شیفت B'),
     ('شیفت C','شیفت C'),)
-    maintime=jdatetime.datetime.now
-    subject=models.CharField(max_length=100,verbose_name='موضوع')
+
+   
+    subject=models.ForeignKey('StationModel',max_length=100,on_delete=models.CASCADE,verbose_name='مکان',related_name='cat')
     categ=models.ManyToManyField(Informationmodel,verbose_name='دسته بندیُ',related_name='info')
-    report=models.TextField(verbose_name='گزارش')
-    date=jmodels.jDateTimeField(default=maintime,verbose_name='تاریخ ثبت',)
+    device=models.ForeignKey('Devicemodel',on_delete=models.SET_NULL,null=True,verbose_name='نام تجهیز')
+    report=models.CharField(max_length=550,verbose_name='شرح خرابی')
+    date=jmodels.jDateTimeField(default=jdatetime.datetime.now,verbose_name='تاریخ ثبت',)
     user=models.ForeignKey(User,on_delete=models.CASCADE,verbose_name='نام کاربری')
     shift=models.CharField(max_length=50,choices=shift_status,verbose_name='شیفت',null=True)
     acepet=models.CharField(max_length=30,choices=acepet_status,default='تایید نشده',verbose_name='وضیعت')
     slug=models.SlugField(unique=True,verbose_name='آدرس گزارش',blank=True)
+    numbercmms=models.CharField(null=True,max_length=50,verbose_name='شماره دستور کار')
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.date)
@@ -76,7 +110,7 @@ class Reportmodel(models.Model):
 
     def __str__(self):
 
-        return "{} {} {} {}".format(self.subject,self.date,self.user,self.shift)
+        return "{} {} {} {} ".format(self.subject,self.date,self.user,self.shift)
     
     def get_absolute_url(self):
         return reverse("net:listreport")

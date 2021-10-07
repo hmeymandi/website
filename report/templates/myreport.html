@@ -26,7 +26,7 @@
               <tr>
                 {% for reports in myreport  %}
                 
-                {% if reports.acepet in 'تایید نشده' or request.user.is_admin or request.user.is_nazer %}
+                {% if reports.acepet in 'تایید نشده' or request.user.is_admin or request.user.is_nazer  %}
                 <td><a href="{% url 'net:reportupdate' reports.pk %}"  > {{reports.subject}}</a>  </td>
               {%else%}
                   

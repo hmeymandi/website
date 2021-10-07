@@ -66,7 +66,7 @@ JALALI_DATE_DEFAULTS = {
             # 'admin/jquery.ui.datepicker.jalali/scripts/calendar.js',
             # 'admin/jquery.ui.datepicker.jalali/scripts/jquery.ui.datepicker-cc.js',
             # 'admin/jquery.ui.datepicker.jalali/scripts/jquery.ui.datepicker-cc-fa.js',
-             #'admin/js/main.js',
+            # 'admin/js/main.js',
         ],
         'css': {
             'all': [
@@ -75,7 +75,6 @@ JALALI_DATE_DEFAULTS = {
         }
     },
 }
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
