@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{%block title%} تغییر رمز عبور{%endblock%}
+
+{%block titel%} تغییر رمز عبور{%endblock%}
+
+
+{% block main %}
+<form method="post" enctype="application/x-www-form-urlencoded">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-6">
+        
+        {{ form.old_password|as_crispy_field }}
+              
+    </div>
+
+    <div class="col-6">
+       
+      
+    </div>
+
+    <div class="col-6">
+        {{form.new_password2|as_crispy_field }}
+        {{form.new_password1|as_crispy_field }} 
+       </div>
+
+      </div>
+      <button type="submit" class='btn btn-success'>تغییر رمز عبور </button>   
+    
+        
+   
+       
+      </div>
+    
+</form> 
+
+{% endblock main %}

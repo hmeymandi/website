@@ -9,9 +9,9 @@ class UserAdmin(BaseUserAdmin):
     form=UserchangeForm
     add_form=UserCreationForm
 
-    list_display=('idcart','first_name','last_name','phone','shift','date')
+    list_display=('idcart','first_name','last_name','phone','shift','date','email')
     list_filter=('idcart','is_active')
-    fieldsets=((User, {'fields': ('idcart','first_name','last_name','shift', 'password','date')}),
+    fieldsets=((User, {'fields': ('idcart','first_name','last_name','shift', 'password','date','email')}),
     ('وضیعت کاربر',{'fields':('is_admin','is_nazer','is_active','is_authe','is_manager')}),
     #('permasion',{'fields':('is_active',)}),
     #('permasion',{'fields':('is_authe',)}),

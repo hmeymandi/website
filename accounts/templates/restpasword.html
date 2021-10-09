@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block main %}
+<form method="post" enctype="application/x-www-form-urlencoded">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-6">
+        
+        {{form}}
+        </div>
+    </div>
+
+      <button type="submit" class='btn btn-success'>ارسال کلمه عبور</button>   
+    </form>
+
+      {% endblock %}

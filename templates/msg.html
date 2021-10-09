@@ -1,8 +1,13 @@
+{%load static%}
+
+<head>
+  <link rel="stylesheet" href=" {%static 'dist/css/rtl.css' %}">
+</head>
 {%if messages %}
 
 {%for msg in messages%}
 {%if msg.tags%}
-<div class="alert alert-{{msg.tags}}" role="alert">
+<div class="alert alert-{{msg.tags}}" role="alert" style="padding: .05rem 25rem;">
     {%endif%}
 {{msg}}
   </div>

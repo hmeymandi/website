@@ -35,7 +35,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-    
+    'rest.apps.RestConfig',
     'report.apps.ReportConfig',
     #'accounts.apps.AccountsConfig',
     'django.contrib.auth',
@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
-    'rest',
+    
     'jalali_date',
     'crispy_forms',
     'widget_tweaks',
@@ -168,3 +168,10 @@ LOGIN_URL='account:login'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+#send EmailBackend
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp-mail.outlook.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'sitenet2021@outlook.com'
+EMAIL_HOST_PASSWORD = 'Net@Net@'

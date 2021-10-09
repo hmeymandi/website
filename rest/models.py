@@ -1,6 +1,6 @@
 from datetime import timedelta
 from django.db import models
-from report.models import Reportmodel 
+from report.models import Reportmodel,StationModel,DeviceModel
 from django.contrib.auth import get_user_model as user_model
 from django.db.models.aggregates import Avg
 from django.db.models.fields import BLANK_CHOICE_DASH
@@ -34,15 +34,15 @@ class Restmodel(models.Model):
 
 
     
-    user=models.ForeignKey(User,on_delete=models.CASCADE,verbose_name='نام جایگزین')
-    user1=models.ForeignKey(User,on_delete=models.CASCADE,related_name='user',verbose_name='نام کاربری',null=True)
+    user=models.ForeignKey(User,null=True,on_delete=models.SET_NULL,verbose_name='نام جایگزین')
+    user1=models.ForeignKey(User,null=True,on_delete=models.SET_NULL,related_name='user',verbose_name='نام کاربری')
     date=jmodels.jDateField(verbose_name='تاریخ ثبت')
     time1=models.TimeField(null=True,verbose_name='شروع مرخصی')
     time2=models.TimeField(null=True,verbose_name='پایان مرخصی')
     dateexit=jmodels.jDateField(verbose_name='تاریخ ورود')
     type=models.CharField(max_length=20,default='h',choices=type_status,verbose_name='نوع مرخصی')
     accept=models.CharField(default='در دست بررسی',max_length=30,choices=accept_status,verbose_name='وضیعت')
-    timeavg=models.CharField(max_length=250,)
+    
     
 
 
@@ -150,10 +150,10 @@ class Repmodel(models.Model):
     class Meta:
         verbose_name=' سیستم قطعات معیوب'
         verbose_name_plural='سیستم قطعات معیوب'
-    user=models.ForeignKey(User,on_delete=CASCADE,verbose_name='نام کاربری')
-    date=jmodels.jDateTimeField(null=True,default= datetime.now().replace(microsecond=0),verbose_name='تاریخ ثبت')
-    name=models.CharField(max_length=150,verbose_name='نام قطعه')
-    station=models.CharField(max_length=50,verbose_name='نام ایستگاه')
+    user=models.ForeignKey(User,null=True,on_delete=models.SET_NULL,verbose_name='نام کاربری')
+    date=jmodels.jDateTimeField(default= datetime.now().replace(microsecond=0),verbose_name='تاریخ ثبت')
+    name=models.ForeignKey(DeviceModel,null=True,on_delete=models.SET_NULL,max_length=150,verbose_name='نام قطعه')
+    station=models.ForeignKey(StationModel,null=True,on_delete=models.SET_NULL,max_length=50,verbose_name='نام ایستگاه')
     subj=models.CharField(max_length=500,verbose_name='توضیحات')
 
    

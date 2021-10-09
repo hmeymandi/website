@@ -9,3 +9,18 @@ body{
 .myfont,.focus-input100{
     font-family: Shabnam !important;
 }
+.alert-success {
+    position: relative !important;
+    padding: .75rem 25rem!important;
+    margin-bottom: 1rem!important;
+    border: 1px solid transparent!important;
+    border-radius: .25rem!important;
+}
+
+alert-success {
+    position: relative;
+    padding: .05rem 25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}

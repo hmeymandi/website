@@ -48,7 +48,7 @@ def myreport(request):
     else:
         myreport=Reportmodel.objects.filter(user=request.user.id)
         return render(request,'myreport.html',{'myreport':myreport})
-
+@login_required
 def home(request):
     
     context={'categ':Reportmodel.objects.filter(categ=1).order_by('-date')}
