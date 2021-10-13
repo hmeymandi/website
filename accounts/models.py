@@ -43,7 +43,7 @@ class User(AbstractBaseUser):
     
     is_active=models.BooleanField(default=True,verbose_name='کاربر عادی')
     is_admin=models.BooleanField(default=False,verbose_name='مدیر')
-    is_authe=models.BooleanField(default=True,verbose_name='سرشیفت')
+    is_authe=models.BooleanField(default=False,verbose_name='سرشیفت')
     is_manager=models.BooleanField(default=False,verbose_name='سرپرست')
     is_nazer=models.BooleanField(default=False,verbose_name='ناظر')
     
@@ -65,3 +65,5 @@ class User(AbstractBaseUser):
     def is_staff(self):
         return self.is_admin  
     
+
+        

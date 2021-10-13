@@ -1,5 +1,8 @@
 from django.contrib.admin.widgets import AdminRadioSelect
 from django.db.models import manager
+from accounts.models import User as user3
+
+
 from django.shortcuts import redirect, render
 from django.shortcuts import HttpResponse
 from jalali_date.fields import JalaliDateField, JalaliDateTimeField
@@ -11,7 +14,10 @@ from .mixin import *
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from jalali_date.widgets import AdminJalaliDateWidget, AdminSplitJalaliDateTime
+from django.contrib.auth.models import AbstractBaseUser, UserManager 
+from accounts.models import User
 
+User=user_model()
 
 
 
@@ -20,13 +26,39 @@ from jalali_date.widgets import AdminJalaliDateWidget, AdminSplitJalaliDateTime
 
 class Restcreate(LoginRequiredMixin,Jalali2date,FormValid,FieldMixin,CreateView):
     model=Restmodel
-
+    
+    
     template_name='rest.html'
     
-    #form_class=Restform
+    
     def get_success_url(self):
         return reverse('rest:myrest')
-    
+
+    def get_form(self,form_class=None):
+        
+        form=super().get_form(form_class)
+        if self.request.user.is_admin or self.request.user.is_nazer:
+
+            user2=User.object.all()
+            form.fields['user'].queryset =user2
+            return form
+        else:
+            user2=User.object.filter(is_admin=False,is_nazer=False)
+            form.fields['user'].queryset =user2
+        
+        return form
+        
+      
+       
+        
+
+           
+
+        
+        
+        
+        
+
 class RepCreate(LoginRequiredMixin,FormRepValid,FieldRepMixin,CreateView):
     model=Repmodel
     #fields='__all__'

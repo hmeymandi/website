@@ -6,6 +6,11 @@ from rest.models import *
 from jalali_date.widgets import AdminJalaliDateWidget, AdminSplitJalaliDateTime
 from jalali_date.fields import JalaliDateField, JalaliDateTimeField
 from django.forms.fields import *
+from accounts.models import User
+
+User=user_model()
+
+
 
 
 class FieldMixin():
@@ -105,3 +110,15 @@ class AccsesrepMixin():
         
         else:
             raise Http404 ('شما دسترسی به این بحش را ندارید')
+
+
+class UserMixin():
+    # user=is_active is_admin is_authe  is_manager is_nazer
+    def dispatch(self, request, *args, **kwargs):
+        lst=[]
+        update=User.objects.all()
+        for i in update.user:            
+            lst.append(i)
+            print(lst)
+            return super().dispatch(request,*args,**kwargs)
+        

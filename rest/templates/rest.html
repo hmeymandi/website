@@ -29,7 +29,12 @@
     <div class="row">
       
       <div class="col-6">
-
+        {% for i in form.user  %}
+   
+          {{i.is_admin}}
+        
+          
+        {% endfor %}
         {{form.user|as_crispy_field }}
         {{form.date|as_crispy_field }}
 

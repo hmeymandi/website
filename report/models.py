@@ -102,7 +102,7 @@ class Reportmodel(models.Model):
     shift=models.CharField(max_length=50,choices=shift_status,verbose_name='شیفت',null=True)
     acepet=models.CharField(max_length=30,choices=acepet_status,default='تایید نشده',verbose_name='وضیعت')
     slug=models.SlugField(unique=True,verbose_name='آدرس گزارش',blank=True)
-    numbercmms=models.CharField(null=True,max_length=50,verbose_name='شماره دستور کار')
+    numbercmms=models.CharField(null=True,default='ICT-',max_length=50,verbose_name='شماره دستور کار')
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.date)

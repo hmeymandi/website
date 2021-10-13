@@ -52,7 +52,7 @@ class Restmodel(models.Model):
         
         return '{} {} {}'.format(self.user,self.user1,self.type)
 
-  
+    
 
     def persian_number(self):
         datetime2jalali=str(self.time1)
@@ -106,6 +106,7 @@ class Restmodel(models.Model):
         
             return '{} {}'.format(a,'روز')
         else:
+
 
             time=jdatetime.datetime.time(self.time1)
             time3=jdatetime.datetime.time(self.time2)
