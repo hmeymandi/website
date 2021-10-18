@@ -57,7 +57,45 @@
       </div>
       <!-- /.card -->
     </div>
+
   </div>
 
 
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    {% if report.has_previous %}
+
+    <li class="page-item"><a class="page-link" href="?page={{report.previous_page_number}}">صفحه قبلی</a></li>
+
+    <li class="page-item"><a class="page-link" href="?page={{report.previous_page_number}}">{{report.previous_page_number}}</a></li>
+
+   
+
+  {% endif %}
+   
+
+  <li class="page-item {% if pagenum == pagenum %} active  {% endif %}">
+
+    <a class="page-link" href="?page{{report.page}}">{{report.number}}</a>
+  </li>
+  
+  {% if report.has_next %}
+  <li class="page-item"><a class="page-link" href="?page={{report.next_page_number}}">{{report.next_page_number}}</a></li>
+  <li class="page-item"><a class="page-link" href="?page={{report.next_page_number}}">صفحه بعد</a></li>
+
+</ul>
+
+
+{% endif %}
+
+
+
+
+
+</nav>
+
   {% endblock main %}
+  <li class="page-item"><a class="page-link" href="#">صفحه قبل</a></li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>

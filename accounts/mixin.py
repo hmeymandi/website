@@ -15,10 +15,10 @@ class FieldMixin():
 
     def dispatch(self, request, *args, **kwargs):
           
-          if self.request.user.is_admin or self.request.user.is_manager:
+          if self.request.user.is_admin :
                
                self.fields=['subject','categ','slug','date','report','shift','user','acepet','numbercmms','device']
-          elif self.request.user.is_authe or self.request.user.is_nazer:
+          elif self.request.user.is_authe or self.request.user.is_nazer or self.request.user.is_manager:
 
                self.fields=['subject','date','report','shift','acepet','numbercmms','device']
           elif self.request.user.is_active:
@@ -60,7 +60,7 @@ class FieldUpdateMixin():
 
           
           if update.user==request.user or request.user.is_admin \
-           or request.user.is_authe or request.user.is_nazer:
+           or request.user.is_authe or request.user.is_nazer or request.user.is_manager:
                
            
 

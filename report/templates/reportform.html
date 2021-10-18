@@ -41,13 +41,13 @@
        
       <div class="col-6">
         {{form.date|as_crispy_field}}
-        {% if request.user.is_admin  %}
+        {% if request.user.is_admin   %}
         {{form.slug|as_crispy_field}}
         {% endif %}
         {{form.report|as_crispy_field}}
         
 
-        {% if user.is_admin  %}
+        {% if user.is_admin %}  
         {{ form.acepet|as_crispy_field }}
         
        
@@ -63,7 +63,7 @@
        </select>
        
        
-         {%elif user.is_authe %}
+         {%elif user.is_authe or user.is_manager %}
          <label for="id_acepet">وضیعت*</label>
          <select  name="acepet" class="select form-control" id="id_acepet" >
            
@@ -89,13 +89,13 @@
     <div class="col-6">
       
 
-        {% if user.is_admin  %}
+        {% if user.is_admin  %} 
         {{ form.user|as_crispy_field }}
         {% endif %}   
     </div>
     <div class="col-6">
       
-         {% if user.is_admin  %}
+         {% if user.is_admin   %}
          {{ form.categ|as_crispy_field }}
         {%endif%}
                 

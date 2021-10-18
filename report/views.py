@@ -14,15 +14,15 @@ from .forms import Informationmodel
 from django.forms import *
 #
 @login_required
-def listreport(request,):
+def listreport(request):
     #if request.user is authenticate:
         
     #print(request.user.is_authe)
-        report=Reportmodel.objects.filter(categ=2).order_by('-date')
+        report=Reportmodel.objects.filter(categ=1).order_by('-date')
         paginator=Paginator(report,10)   
         pagenum=request.GET.get('page')
         page_obj=paginator.get_page(pagenum)
-        context={'report':page_obj}
+        context={'report':page_obj,'pagenum':pagenum}
     
 
         return render(request,'listreport.html',context)
