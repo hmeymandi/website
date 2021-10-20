@@ -27,6 +27,9 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
+    class Meta:
+        verbose_name = 'وضیعت کاربری'
+        verbose_name_plural='وضیعت کاربری'
     shift_status=((' A شیفت ',' A شیفت '),(' B شیفت ',' B شیفت '),
                 (' C شیفت ',' C شیفت '),
 
@@ -52,7 +55,7 @@ class User(AbstractBaseUser):
     object=UserManager()
 
     def __str__(self):
-        return self.first_name
+        return (f'{self.first_name} {self.last_name}')
 
 
     def has_perm(self, perm,obj=None):

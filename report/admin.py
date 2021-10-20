@@ -11,6 +11,9 @@ class Reportadmin(admin.ModelAdmin):
     def category_to_str(self,obj):
     
         return "".join([category.title for category in obj.categ.all()])
+    def __str__(self):
+    
+        return "{} {} {} {} ".format(self.subject,self.date,self.user,self.shift)
 
 @admin.register(Informationmodel)
 class Informationadmin(admin.ModelAdmin):

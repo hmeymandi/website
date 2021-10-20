@@ -36,7 +36,7 @@ class FormValidMixin():
                form.save()
         
           else:
-               a=(Informationmodel.objects.get(position=2))
+               a=(Informationmodel.objects.get(position=1))
                
                #b=StationModel.objects.get(position=1)   
                                                                                                                                   

@@ -63,7 +63,7 @@ class Reportdeatail(DetailView):
         slug=self.kwargs.get('slug')
         return get_object_or_404(Reportmodel.objects.all(),slug=slug)
 
-class ReportCreate(LoginRequiredMixin,FormValidMixin,FieldMixin,CreateView):
+class ReportCreate(LoginRequiredMixin,FieldMixin,FormValidMixin,CreateView):
     model=Reportmodel
    #fields=['subject','categ','slug','date','report','shift','user','acepet']
     template_name='reportform.html'
