@@ -151,11 +151,21 @@ class Repmodel(models.Model):
     class Meta:
         verbose_name=' سیستم قطعات معیوب'
         verbose_name_plural='سیستم قطعات معیوب'
+
+    subj_status=(('قطعه تحویل مهندسی می باشد','قطعه تحویل مهندسی می باشد'),
+    ('قطعه در انبار می باشد','قطعه در انبار می باشد'),
+    ('در حال تست','در حال تست'),
+    ('نصب شده','نصب شده'),)
+
+
+
     user=models.ForeignKey(User,null=True,on_delete=models.SET_NULL,verbose_name='نام کاربری')
+    dev_code=models.CharField(max_length=50,null=True,unique=True,verbose_name='کد اموال')
+    dev_code1=models.CharField(max_length=50,null=True,verbose_name='کد انبار')
     date=jmodels.jDateTimeField(default= datetime.now().replace(microsecond=0),verbose_name='تاریخ ثبت')
     name=models.ForeignKey(DeviceModel,null=True,on_delete=models.SET_NULL,max_length=150,verbose_name='نام قطعه')
     station=models.ForeignKey(StationModel,null=True,on_delete=models.SET_NULL,max_length=50,verbose_name='نام ایستگاه')
-    subj=models.CharField(max_length=500,verbose_name='توضیحات')
+    subj=models.CharField(max_length=500,choices=subj_status,verbose_name='توضیحات')
 
    
 

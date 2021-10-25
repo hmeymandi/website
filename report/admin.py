@@ -3,6 +3,7 @@ from .models import *
 
 @admin.register(Reportmodel)
 class Reportadmin(admin.ModelAdmin):
+    
     field=['user','shift','subject']
     list_filter=['date','user']
     list_display=['user','shift','date','category_to_str']
@@ -29,9 +30,9 @@ class StationModeladmin(admin.ModelAdmin):
 
 @admin.register(DeviceModel)
 class devicemodeladmin(admin.ModelAdmin):
-    fields=['device_name','position','slug','status']
+    fields=['device_name','position','slug','status','name']
     list_fields=['device_name']
-    list_display=['device_name','slug','status']
+    list_display=['device_name','slug','status','name']
 
 
 

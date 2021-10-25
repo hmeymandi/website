@@ -33,13 +33,16 @@ class DeviceModel(models.Model):
     class Meta:
         verbose_name = 'نام تجهیز'
         verbose_name_plural = 'نام تجهیز'
-    device_name = models.CharField(max_length=75,verbose_name='نام تجهیز')
+        ordering=['position']
+    device_name = models.ForeignKey('self',null=True,blank=True,on_delete=models.SET_NULL,max_length=75,verbose_name='نام بخش',related_name='device')
+
+    name=models.CharField(max_length=250, verbose_name='نام')
     slug=models.SlugField(max_length=50,unique=True,verbose_name='آدرس')
     status=models.BooleanField(default=True,verbose_name='نمایش ')
     position=models.IntegerField(default=None,verbose_name='موقیعت',)
 
     def __str__(self):
-        return self.device_name
+        return self.name
 
 class StationModel(models.Model):
     class Meta:

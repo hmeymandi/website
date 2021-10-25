@@ -12,7 +12,7 @@ class Restadmin(admin.ModelAdmin):
 
 @admin.register(Repmodel)
 class Repadmin(admin.ModelAdmin):
-    fields=['user','date','name','station','subj']
+    fields=['user','date','name','station','subj','dev_code','dev_code1']
     list_filter=['station','subj']
     list_display=['user','date','name','station','subj']
     
